@@ -2,6 +2,115 @@
 This is for style
 */
 
+@font-face {
+    font-family: HeaderFont;
+    src: url(./Fonts/MaisondeartisanfreeRegular-qZl52.otf)
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.title {
+    top: 10%;
+    
+    font-size: 110px;
+    position: absolute;
+    font-family: HeaderFont;
+    color: rgb(255, 255, 255);
+    
+}
+
+
 body {
-    background-color: #00FFEF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-image: url("../images/201218101034-mark-zuckerberg-file.jpg");
+    background-size: cover;
+    background-position: center;
+
+}
+
+.login {
+    width: 30%;
+    background: #00447ca9;
+    color: white;
+    border-radius: 10px;
+    padding: 15px 0px;
+    
+}
+
+.login h1 {
+
+
+    font-size: 80px;
+    text-align:center;
+    margin:auto;
+    font-family: HeaderFont;
+}
+
+.login .input-box {
+    width: 90%;
+    height: 50px;
+    background: #cacaca;
+    margin: 25px;
+    border:0px solid #6e6e6e79;
+    border-radius:10px;
+    
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 3px solid #6e6e6e79;
+    border-radius: 10px;
+    padding: 20px 45px 20px 7px;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.login .button1 {
+    
+    height: 50px;
+    
+    margin: 15px 0px;
+    text-align: center;
+}
+
+.login .btn {
+    display: flex;
+    width: 80%;
+    height: 50px;
+    border: 3px solid #30303077;
+    border-radius: 40px;
+    
+    margin: 0 auto;
+    font-size: 30px;
+    font-weight: 600;
+    cursor: pointer;
+    background: #30303077;
+    color: #fff;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.btn:hover {
+    background: #0000009f;
+}
+
+#footer {
+
+    
+    position: relative;
+    min-height: 100vh;
 }
