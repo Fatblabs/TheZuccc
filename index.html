@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     
-    <title>Todo App</title>
+    <title>The Zucc</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,13 +10,13 @@
     <link href="./lib/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href = "./src/style.css">
 
-    <script src="./src/main.js"></script>
+    
 </head>
 
 
 
 <body>
-
+    
     <div class="title">
     
         <p class="text-center">THE ZUCCC</p>
@@ -29,16 +29,14 @@
         <form action="">
             <h1> Login </h1>
             <div class="input-box">
-                <input type = "text" placeholder="Username"
-                required>
+                <input type = "text" placeholder="Username" id="UsernameElement" required>
             </div>
-            <div class="input-box">
-                <input type = "text" placeholder="Password"
-                required>
+            <div class="input-box" id="PasswordElement">
+                <input type = "text" placeholder="Password" id="PasswordElement" required>
             </div>
 
             <div class = "button1">
-                <button type="button" class="btn btn-primary">Login</button>
+                <button id = "LoginButton" type="button" class="btn btn-primary" disabled >Login</button>
                  
             </div>
             
@@ -51,7 +49,8 @@
 
 
     </div>
-    
+    <script src="./src/main.js"></script>
+</body>
 <!--/body>
 <div id="footer">
     <footer id="footer"> 
