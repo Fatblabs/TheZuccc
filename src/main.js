@@ -4,23 +4,34 @@ import javascriptLogo from './javascript.svg'
 import viteLogo from '/vite.svg'
 import { setupCounter } from './counter.js'
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
-
-setupCounter(document.querySelector('#counter'))
 */
+
+var usernameElement = document.getElementById('UsernameElement');
+var passwordElement = document.getElementById('PasswordElement');
+var LoginButton = document.getElementById('LoginButton');
+
+var textIsPresentinBoth = false;
+
+var username = "";
+var password = "";
+
+//const LoginButtonDisabled = LoginButton.cloneNode(true);
+//const LoginButtonEnabled = document.createElement('input-box');
+
+
+
+function checkInputs() {
+  LoginButton.disabled = !(username.trim() != "" && password.trim() != "");
+}
+
+usernameElement.addEventListener('input', function(event) {
+  username = event.target.value;
+  checkInputs();
+  //console.log(event.target.value);
+})
+
+passwordElement.addEventListener('input', function(event) {
+  password = event.target.value;
+  checkInputs();
+  //console.log(event.target.value);
+})
