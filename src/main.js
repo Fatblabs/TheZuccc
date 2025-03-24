@@ -33,5 +33,16 @@ usernameElement.addEventListener('input', function(event) {
 passwordElement.addEventListener('input', function(event) {
   password = event.target.value;
   checkInputs();
-  //console.log(event.target.value);
+  console.log(event.target.value);
 })
+
+
+function showPass() {
+  var x = document.getElementById("PasswordElement2");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+  
+}
