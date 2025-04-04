@@ -106,5 +106,4 @@ function showPass() {
   } else {
     x.type = "password";
   }
-  
 }
