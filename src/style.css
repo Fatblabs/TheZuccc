@@ -37,6 +37,7 @@ body {
 }
 
 .login {
+    position: fixed;
     width: 30%;
     background: #00447ca9;
     color: white;
@@ -46,8 +47,6 @@ body {
 }
 
 .login h1 {
-
-
     font-size: 80px;
     text-align:center;
     margin:auto;
@@ -61,7 +60,6 @@ body {
     margin: 25px;
     border:0px solid #6e6e6e79;
     border-radius:10px;
-    
 }
 
 .input-box input {
@@ -78,9 +76,7 @@ body {
 }
 
 .login .button1 {
-    
     height: 50px;
-    
     margin: 15px 0px;
     text-align: center;
 }
@@ -113,4 +109,18 @@ body {
     
     position: relative;
     min-height: 100vh;
+}
+
+
+#notification-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    z-index: 1050;
+}
+
+.alert {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
 }
