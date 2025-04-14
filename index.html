@@ -5,17 +5,22 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="./lib/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery (Required for Bootstrap 4) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap Bundle (includes Popper.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <link rel="stylesheet" href = "./src/style.css">
 </head>
 <br>
-
 <body class="Login">
 <!--<div class="container">
         <p class="text-center">THE ZUCCC</p>
     </div>
 -->
     <div class="login">
-        <!--form class = "loginForm" action="./draw.html"-->
+        <form class = "loginForm" action="./draw.html">
             <h1> Login </h1>
             <div class="input-box">
                 <input type = "text" placeholder="Username" id="UsernameElement" required>
@@ -28,9 +33,9 @@
                 <span class="checkmark"></span>
             </label>
             <div class = "button1">
-                <button id = "LoginButton" type="submit" class="btn btn-primary" disabled >Login</button>
+                <button id = "LoginButton" type="submit" class="btn btn-primary" enabled >Login</button>
             </div>
-        <!--/form-->
+        </form>
     </div>
     <br>
 
@@ -49,7 +54,12 @@
     </div>
 
     <script src="./src/main.js"></script>
+
+    <div id="notification-container">
+        
+    </div>
 </body>
+
 <!--/body>
 <div id="footer">
     <footer id="footer"> 

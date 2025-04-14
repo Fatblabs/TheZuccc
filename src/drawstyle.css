@@ -144,6 +144,10 @@ font-family: Arial, Helvetica, sans-serif;
     background: #4A98F7;
     border:1px solid #4A98F7;
 }
+.buttons .log-out-button{
+    background: #f74a4a;
+    border:1px solid #4A98F7;
+}
 .drawing-board{
     flex: 1;
 }
