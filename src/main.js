@@ -36,9 +36,9 @@ passwordElement.addEventListener('input', function(event) {
   console.log(event.target.value);
 })
 
-
+/* Show Password Function */
 function showPass() {
-  var x = document.getElementById("PasswordElement2");
+  var x = document.getElementById("PasswordElement");
   if (x.type === "password") {
     x.type = "text";
   } else {
@@ -46,3 +46,7 @@ function showPass() {
   }
   
 }
+/*
+function accountCheck() {
+  
+} */

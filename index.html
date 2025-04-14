@@ -1,60 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <title>The Zucc</title>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <link href="./lib/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href = "./src/style.css">
-
-    
 </head>
+<br>
 
-
-
-<body>
-    
-    <div class="title">
-    
+<body class="Login">
+<!--<div class="container">
         <p class="text-center">THE ZUCCC</p>
-        
-
-        
     </div>
-    
+-->
     <div class="login">
-        <form action="">
+        <!--form class = "loginForm" action="./draw.html"-->
             <h1> Login </h1>
             <div class="input-box">
                 <input type = "text" placeholder="Username" id="UsernameElement" required>
             </div>
-            <div class="input-box" id="PasswordElement">
-                <input type = "password" placeholder="Password" id="PasswordElement2" required>
+            <div class="input-box">
+                <input type = "password" placeholder="Password" id="PasswordElement" required>
             </div>
-            
-            <!--onclick="myFunction()"-->
             <label class="check">
                 <input type="checkbox" onclick="showPass()"> Show Password
                 <span class="checkmark"></span>
             </label>
-
             <div class = "button1">
-                <button id = "LoginButton" type="button" class="btn btn-primary" disabled >Login</button>
-                 
+                <button id = "LoginButton" type="submit" class="btn btn-primary" disabled >Login</button>
             </div>
-            
-            
-
-
-        </form>
-
-        
-
-
+        <!--/form-->
     </div>
+    <br>
+
+    <div class="account">
+        <h1> Do you want to create a new account?</h1>
+        <div class="accountButtons">
+            <label class = "yesButton">
+                <button id = "ConfirmLogin">Yes</button>
+            </label>
+            
+            <label class="noButton">
+                <button id = "DenyLogin">No</button>
+            </label>
+            
+        </div>
+    </div>
+
     <script src="./src/main.js"></script>
 </body>
 <!--/body>
