@@ -29,7 +29,18 @@ class Account {
         //Run Validate Fields to make sure it matches all the requirements for the username and password. +1 error if there is in any of them.
         if (!this.validateFields(input)) {
           error++;
+          
+          
         }
+
+        if(!checkIfAccountExists(this.form)) {
+          error++;
+
+         let account = document.getElementById('account');
+         account.innerHTML = '<h1> Do you want to log in? </h1>  <button id = "yesButton" class="yesButton" action="./draw.html">Yes</button>  <button id = "noButton" class="noButton" onclick="closeAccount()">No</button>';
+          
+        }
+
       });
       if (error == 0) {
         localStorage.setItem("auth", 1);
@@ -108,6 +119,19 @@ function showPass() {
   }
   
 }
+
+function checkIfAccountExists(field) {
+  // if(){
+  //   return true;
+  // } else {
+  //   return false;
+  // }
+  console.log("test123");
+  return false;
+}
+
+
+
 /*
 function accountCheck() {
   

@@ -187,12 +187,15 @@ body {
     left: 50%;
     transform: translate(-50%, -50%); */
     width: 750px;
-    height: 200px;
+    height: 150px;
     background: #00447cb4;
     color: white;
     border-radius: 10px;
-    
+    text-align: center;
+    visibility: hidden;
 }
+
+
 
 .login h1 {
     
@@ -203,23 +206,9 @@ body {
 }
 
 
-.account input {  
-    margin: auto;
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-    
-    
-}
 
-.accountButtons {
-    height: 50px;
-    
-    margin: 15px 0px;
-    text-align: center;
-}
+
+
 
 .yesButton{
     
@@ -228,16 +217,17 @@ body {
     border: 3px solid #30303077;
     border-radius: 40px;
     
-    margin: 0 auto;
+    margin: auto;
     font-size: 30px;
-    font-weight: 600;
+    font-weight: 400;
+    
     cursor: pointer;
     background: #30303077;
-    color: #fff;
+    
     text-align: center;
     align-items: center;
     justify-content: center;
-    
+    color: white;
 }
 
 .noButton{
@@ -247,15 +237,16 @@ body {
     border: 3px solid #30303077;
     border-radius: 40px;
     
-    margin: 0 auto;
+    margin: auto;
     font-size: 30px;
-    font-weight: 600;
+    font-weight: 400;
     cursor: pointer;
     background: #30303077;
-    color: #fff;
+
     text-align: center;
     align-items: center;
     justify-content: center;
+    color: white;
     
 }
 
