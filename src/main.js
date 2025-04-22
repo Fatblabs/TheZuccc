@@ -6,6 +6,10 @@ import { setupCounter } from './counter.js'
 
 */
 
+//const { Wait } = require("aws-cdk-lib/aws-stepfunctions");
+
+//const { a } = require("@aws-amplify/backend");
+
 //const { ConsoleLogger } = require("aws-amplify/utils");
 //We've created a class so that it can handle these fields, and so that it can handle the 'form' as created in the html file perviously.
 class Account {
@@ -15,9 +19,21 @@ class Account {
     this.validation();
   }
 
+  auth(error) {
+    if (error == 0) {
+      localStorage.setItem("auth", 1);
+      this.form.submit();
+    }
+    else {
+      console.log("ERROR");
+    }
+  }
+
   validation() {
     //self correlates to all the variable fields in the constructor
     let self = this;
+    var user;
+    var pass;
     //we add an event listener to the submit button (which is part of a form element in html)
     this.form.addEventListener("submit", (event) => {
       event.preventDefault();
@@ -27,26 +43,30 @@ class Account {
         //Grab the private field
         const input = document.querySelector(`#${field}`);
         //Run Validate Fields to make sure it matches all the requirements for the username and password. +1 error if there is in any of them.
+        if (input.type == "password") {
+          pass = input.value;
+        } else {
+          user = input.value;
+        }
         if (!this.validateFields(input)) {
           error++;
-          
-          
         }
-
-        if(!checkIfAccountExists(this.form)) {
-          error++;
-          const loginDiv = document.querySelector(".login");
-          loginDiv.style.visibility = "hidden";
-         let account = document.getElementById('account');
-         account.innerHTML = '<h1> Do you want to log in? </h1>  <button id = "yesButton" class="yesButton" onclick="openAccount()">Yes</button>  <button id = "noButton" class="noButton" onclick="closeAccount()">No</button>';
-         account.style.visibility = "visible";
-         
-        }
-
       });
-      if (error == 0) {
-        localStorage.setItem("auth", 1);
-        this.form.submit();
+
+      if(!checkIfAccountExists(this.fields)) {
+        document.getElementById("yesButton").addEventListener("click", (event) => {
+          if (!openAccount(user, pass, error)) {
+            this.ping("Hey man, sorry for calling you stupid, but something went wrong when trying to create your dumb account", "error");
+            error++;
+          }
+          else {
+            error = 0;
+            this.auth(error);
+          }
+        });
+      }
+      else {
+        this.auth(error);
       }
     })
   }
@@ -121,30 +141,29 @@ function showPass() {
   }
   
 }
-
+//CHECK the database if the account exists. Return true if exists. If it doesn't, then prompt user to sign up
 function checkIfAccountExists(field) {
-  // if(){
-  //   return true;
-  // } else {
-  //   return false;
-  // }
-  console.log("test123");
+  if (true) {
+    const loginDiv = document.querySelector(".login");
+        loginDiv.style.visibility = "hidden";
+        let account = document.getElementById('account');
+
+        account.innerHTML = `
+          <h1> Do you want to log in? </h1> 
+          <button id = "yesButton" class="yesButton">Yes</button> 
+          <button id = "noButton" class="noButton" onclick="closeAccount()">No</button>
+        `;
+        account.style.visibility = "visible";
+  }
   return false;
 }
 
-function openAccount(username, password, error) {
-  error.value = 0;
-  
-
-  
-  return false;
+//connects with database and adds new table element containing new user and pass
+function openAccount(user, pass, error) {
+  //console.log("It works: " + user + " " + pass + " " + error);
+  return true;
 }
-
+//Reload page cuz we don't need to really do anything after the user presses no when prompted
 function closeAccount() {
   location.reload();
 }
-
-/*
-function accountCheck() {
-  
-} */
