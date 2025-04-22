@@ -35,10 +35,12 @@ class Account {
 
         if(!checkIfAccountExists(this.form)) {
           error++;
-
+          const loginDiv = document.querySelector(".login");
+          loginDiv.style.visibility = "hidden";
          let account = document.getElementById('account');
-         account.innerHTML = '<h1> Do you want to log in? </h1>  <button id = "yesButton" class="yesButton" action="./draw.html">Yes</button>  <button id = "noButton" class="noButton" onclick="closeAccount()">No</button>';
-          
+         account.innerHTML = '<h1> Do you want to log in? </h1>  <button id = "yesButton" class="yesButton" onclick="openAccount()">Yes</button>  <button id = "noButton" class="noButton" onclick="closeAccount()">No</button>';
+         account.style.visibility = "visible";
+         
         }
 
       });
@@ -130,7 +132,17 @@ function checkIfAccountExists(field) {
   return false;
 }
 
+function openAccount(username, password, error) {
+  error.value = 0;
+  
 
+  
+  return false;
+}
+
+function closeAccount() {
+  location.reload();
+}
 
 /*
 function accountCheck() {
