@@ -6,12 +6,16 @@ import { setupCounter } from './counter.js'
 
 */
 
+//import { Wait } from "aws-cdk-lib/aws-stepfunctions";
+
 //const { Wait } = require("aws-cdk-lib/aws-stepfunctions");
 
 //const { a } = require("@aws-amplify/backend");
 
 //const { ConsoleLogger } = require("aws-amplify/utils");
 //We've created a class so that it can handle these fields, and so that it can handle the 'form' as created in the html file perviously.
+
+
 class Account {
   constructor(form, fields) {
     this.form = form;
@@ -35,7 +39,9 @@ class Account {
     var user;
     var pass;
     //we add an event listener to the submit button (which is part of a form element in html)
-    this.form.addEventListener("submit", (event) => {
+    this.form.addEventListener("submit", async (event) => {
+      console.log("Submit handler triggered");
+
       event.preventDefault();
       let error = 0;
       //For each field
@@ -52,23 +58,31 @@ class Account {
           error++;
         }
       });
-
-      if(!checkIfAccountExists(this.fields)) {
+      if (!(await checkIfAccountExists(user, pass))) {
+        console.log("something ran");
+        error++;
+        const loginDiv = document.querySelector(".login");
+        loginDiv.style.visibility = "hidden";
+        let account = document.getElementById('account');
+        account.innerHTML = '<h1> Do you want to log in? </h1>  <button id = "yesButton" class="yesButton">Yes</button>  <button id = "noButton" class="noButton" onclick="closeAccount()">No</button>';
+        account.style.visibility = "visible";
         document.getElementById("yesButton").addEventListener("click", (event) => {
           if (!openAccount(user, pass, error)) {
             this.ping("Hey man, sorry for calling you stupid, but something went wrong when trying to create your dumb account", "error");
             error++;
           }
           else {
+            console.log("Accounts doesn't exist, account created");
             error = 0;
             this.auth(error);
           }
         });
       }
       else {
+        console.log("Accounts exists, account not created");
         this.auth(error);
       }
-    })
+    });
   }
 
   validateFields(field) {
@@ -139,31 +153,59 @@ function showPass() {
   } else {
     x.type = "password";
   }
-  
 }
 //CHECK the database if the account exists. Return true if exists. If it doesn't, then prompt user to sign up
-function checkIfAccountExists(field) {
-  if (true) {
-    const loginDiv = document.querySelector(".login");
-        loginDiv.style.visibility = "hidden";
-        let account = document.getElementById('account');
-
-        account.innerHTML = `
-          <h1> Do you want to log in? </h1> 
-          <button id = "yesButton" class="yesButton">Yes</button> 
-          <button id = "noButton" class="noButton" onclick="closeAccount()">No</button>
-        `;
-        account.style.visibility = "visible";
+async function checkIfAccountExists(user, pass) {
+  try {
+    const response = await fetch('http://10.105.55.148:3000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: user,
+        password: pass
+      })
+    });
+    const data = await response.text();
+    console.log(data);
+    return data === "found";
+    } catch (error) {
+    console.error("Login check failed:", error);
+    return false;
   }
-  return false;
 }
 
 //connects with database and adds new table element containing new user and pass
-function openAccount(user, pass, error) {
-  //console.log("It works: " + user + " " + pass + " " + error);
-  return true;
+async function openAccount(user, pass, error) {
+  try {
+    const response = await fetch('http://10.105.55.148:3000/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: user,
+        password: pass
+      })
+    });
+    const data = await response.text();
+    console.log("Signup response:", data);
+    return data === "created";
+  } catch (error) {
+    console.error("Signup failed:", error);
+    return false;
+  }
 }
+
 //Reload page cuz we don't need to really do anything after the user presses no when prompted
 function closeAccount() {
   location.reload();
 }
+async function getIpAddress() {
+  const response = await fetch('https://api.ipify.org?format=json');
+  const data = await response.json();
+  console.log(`Your IP Address: ${data.ip}`);
+}
+
+getIpAddress();
