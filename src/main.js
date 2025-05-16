@@ -157,7 +157,7 @@ function showPass() {
 //CHECK the database if the account exists. Return true if exists. If it doesn't, then prompt user to sign up
 async function checkIfAccountExists(user, pass) {
   try {
-    const response = await fetch('http://10.105.55.148:80/login', {
+    const response = await fetch('http://10.105.71.14:80/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -179,7 +179,7 @@ async function checkIfAccountExists(user, pass) {
 //connects with database and adds new table element containing new user and pass
 async function openAccount(user, pass, error) {
   try {
-    const response = await fetch('http://10.105.55.148:80/signup', {
+    const response = await fetch('http://10.105.71.14/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
