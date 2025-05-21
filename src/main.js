@@ -156,7 +156,7 @@ function showPass() {
 //CHECK the database if the account exists. Return true if exists. If it doesn't, then prompt user to sign up
 async function checkIfAccountExists(user, pass) {
   try {
-    const response = await fetch('https://76.146.197.215:3000/login', {
+    const response = await fetch('https://6605-2601-600-8d82-2480-3489-e741-4354-7276.ngrok-free.app/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -178,7 +178,7 @@ async function checkIfAccountExists(user, pass) {
 //connects with database and adds new table element containing new user and pass
 async function openAccount(user, pass, error) {
   try {
-    const response = await fetch('https://76.146.197.215:3000/', {
+    const response = await fetch('https://6605-2601-600-8d82-2480-3489-e741-4354-7276.ngrok-free.app/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
