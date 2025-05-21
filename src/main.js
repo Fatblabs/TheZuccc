@@ -184,15 +184,16 @@ async function openAccount(user, pass, error) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username: user,
-        password: pass
+        username: username,
+        password: password
       })
     });
+
     const data = await response.text();
-    console.log("Signup response:", data);
-    return data === "created";
+    console.log('Signup response:', data);
+    return data === 'created';
   } catch (error) {
-    console.error("Signup failed:", error);
+    console.error('Signup failed:', error);
     return false;
   }
 }
