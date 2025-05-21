@@ -15,7 +15,7 @@ import { setupCounter } from './counter.js'
 //const { ConsoleLogger } = require("aws-amplify/utils");
 //We've created a class so that it can handle these fields, and so that it can handle the 'form' as created in the html file perviously.
 
-
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 class Account {
   constructor(form, fields) {
     this.form = form;
@@ -157,8 +157,6 @@ function showPass() {
 //CHECK the database if the account exists. Return true if exists. If it doesn't, then prompt user to sign up
 async function checkIfAccountExists(user, pass) {
   try {
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-
     const response = await fetch('https://76.146.197.215:3000/login', {
       method: 'POST',
       headers: {
@@ -181,8 +179,6 @@ async function checkIfAccountExists(user, pass) {
 //connects with database and adds new table element containing new user and pass
 async function openAccount(user, pass, error) {
   try {
-    process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
-
     const response = await fetch('https://76.146.197.215:3000/', {
       method: 'POST',
       headers: {
