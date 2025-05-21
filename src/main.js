@@ -15,7 +15,6 @@ import { setupCounter } from './counter.js'
 //const { ConsoleLogger } = require("aws-amplify/utils");
 //We've created a class so that it can handle these fields, and so that it can handle the 'form' as created in the html file perviously.
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 class Account {
   constructor(form, fields) {
     this.form = form;
