@@ -5,8 +5,11 @@ fillColor = document.querySelector("#fill-color")
 colorBtns = document.querySelectorAll(".colors .option"),
 colorPicker = document.querySelector("#color-picker"),
 clearCanvas = document.querySelector(".clear-canvas"),
-sameImage = document.querySelector(".save-img"),
+saveImage = document.querySelector(".save-img"),
 ctx = canvas.getContext("2d");
+const link = document.createElement("a");
+const img = new Image();
+//try to set an image as a background, or use image bit data 
 
 let prevMouseX, prevMouseY, snapshot,
 isDrawing = false,
@@ -19,11 +22,21 @@ const setCanvasBackground = () => {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = selectedColor;
 }
+const setDrawingBackground = () => {
+    img.onload = () => {
+        ctx.drawImage(img,0,0);
+    }
+    img.src = "file:///C:/Users/s-khuum/Downloads/2077150.webp"; //random image
+    //ctx.fillRect(0, 0, canvas.width, canvas.height);
+    //ctx.fillStyle = link.ImageData;
+    //ctx.drawImage = (Image, 0, 0);
+}
 
 window.addEventListener("load", () => {
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
     setCanvasBackground();
+    //setDrawingBackground();
 });
 
 const startDraw = (e) =>{
@@ -80,7 +93,7 @@ clearCanvas.addEventListener("click", () =>{
     setCanvasBackground();
 });
 
-sameImage.addEventListener("click", () =>{
+saveImage.addEventListener("click", () =>{
     const link = document.createElement("a");
     link.download = `${Date.now()}.jpg`;
     link.href = canvas.toDataURL();
