@@ -26,98 +26,115 @@ class Account {
     if (error == 0) {
       localStorage.setItem("auth", 1);
       this.form.submit();
-    }
-    else {
+    } else {
       console.log("ERROR");
     }
   }
 
   validation() {
-    //self correlates to all the variable fields in the constructor
     let self = this;
-    var user;
-    var pass;
-    //we add an event listener to the submit button (which is part of a form element in html)
-    this.form.addEventListener("submit", async (event) => {
-      console.log("Submit handler triggered");
+    let user, pass;
 
-      event.preventDefault();
-      let error = 0;
-      //For each field
-      self.fields.forEach((field) => {
-        //Grab the private field
-        const input = document.querySelector(`#${field}`);
-        //Run Validate Fields to make sure it matches all the requirements for the username and password. +1 error if there is in any of them.
-        if (input.type == "password") {
-          pass = input.value;
-        } else {
-          user = input.value;
-        }
-        if (!this.validateFields(input)) {
-          error++;
-        }
-      });
-      if (!(await checkIfAccountExists(user, pass))) {
-        console.log("something ran");
-        error++;
-        const loginDiv = document.querySelector(".login");
-        loginDiv.style.visibility = "hidden";
-        let account = document.getElementById('account');
-        account.innerHTML = '<h1> Do you want to log in? </h1>  <button id = "yesButton" class="yesButton">Yes</button>  <button id = "noButton" class="noButton" onclick="closeAccount()">No</button>';
-        account.style.visibility = "visible";
-        document.getElementById("yesButton").addEventListener("click", (event) => {
-          if (!openAccount(user, pass, error)) {
-            this.ping("Hey man, sorry for calling you stupid, but something went wrong when trying to create your dumb account", "error");
+    this.form.addEventListener("submit", async (event) => {
+      try {
+        console.log("Submit handler triggered");
+        event.preventDefault();
+        let error = 0;
+
+        // Validate each field
+        self.fields.forEach((field) => {
+          const input = document.querySelector(`#${field}`);
+          if (input.type === "password") {
+            pass = input.value;
+          } else {
+            user = input.value;
+          }
+          if (!this.validateFields(input)) {
             error++;
           }
-          else {
-            console.log("Accounts doesn't exist, account created");
-            error = 0;
-            this.auth(error);
-          }
         });
-      }
-      else {
-        console.log("Accounts exists, account not created");
-        this.auth(error);
+
+        // Check if account exists
+        const exists = await checkIfAccountExists(user, pass);
+        if (!exists) {
+          console.log("Account not found, prompting to sign up");
+          error++;
+          document.querySelector(".login").style.visibility = "hidden";
+
+          const accountDiv = document.getElementById("account");
+          accountDiv.innerHTML = `
+            <h1> Do you want to sign up? </h1>
+            <button id="yesButton" class="yesButton">Yes</button>
+            <button id="noButton" class="noButton" onclick="closeAccount()">No</button>
+          `;
+          accountDiv.style.visibility = "visible";
+
+          // Attach click handler for “Yes”, and catch its errors too:
+          document
+            .getElementById("yesButton")
+            .addEventListener("click", async (event) => {
+              try {
+                const created = await openAccount(user, pass, error);
+                if (!created) {
+                  this.ping(
+                    "Hey man, sorry for calling you stupid, but something went wrong when trying to create your dumb account",
+                    "error"
+                  );
+                  error++;
+                } else {
+                  console.log("Account created successfully!");
+                  error = 0;
+                  this.auth(error);
+                }
+              } catch (err) {
+                console.error("Error in signup click‐handler:", err);
+                this.ping(
+                  "A network error occurred while creating your account. Please check your connection and try again.",
+                  "error"
+                );
+              }
+            });
+        } else {
+          console.log("Account exists, proceeding to log in");
+          this.auth(error);
+        }
+      } catch (err) {
+        console.error("Error in submit handler:", err);
+        this.ping(
+          "Something went wrong while submitting the form. Please try again.",
+          "error"
+        );
       }
     });
   }
 
   validateFields(field) {
-    //Handles case when either one of the fields are blank
-    if (field.value.trim() == "") {
+    // … your existing validation logic …
+    if (field.value.trim() === "") {
       this.ping("You gotta put something....", "error");
+      return false;
     }
-    else {
-      //If this is a password Field
-      if (field.type == "password") {
-        //If the password field is less than 8 characters
-        if (field.value.length < 8) {
-          this.ping("What, you want your password to be brute forced within seconds? Make password that's more than 8 characters you idiot", "error");
-          return false;
-        }
-        else {
-          return true;
-        }
+    if (field.type === "password") {
+      if (field.value.length < 8) {
+        this.ping(
+          "What, you want your password to be brute forced within seconds? Make password that's more than 8 characters you idiot",
+          "error"
+        );
+        return false;
       }
-      //If this is a username field
-      else {
-        //If the username field is less than 3 characters
-        if (field.value.length < 3) {
-          this.ping("Dude, are you serious???? You gotta make your username longer than that", "error")
-          return false;
-        }
-        else {
-          return true;
-        }
+      return true;
+    } else {
+      if (field.value.length < 3) {
+        this.ping("Dude, are you serious???? You gotta make your username longer than that", "error");
+        return false;
       }
+      return true;
     }
   }
 
   ping(message, status) {
-    if (status == "error") {
-      let notification = document.createElement("div");
+    if (status === "error") {
+      const notification = document.createElement("div");
       notification.classList.add("alert", "alert-warning", "alert-dismissible", "fade", "show");
       notification.role = "alert";
       notification.innerHTML = `
@@ -125,11 +142,10 @@ class Account {
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
-    `;
-    document.getElementById("notification-container").appendChild(notification)
-    }
-    else {
-      console.log("Skibidi")
+      `;
+      document.getElementById("notification-container").appendChild(notification);
+    } else {
+      console.log("Skibidi");
     }
   }
 }
@@ -156,7 +172,7 @@ function showPass() {
 //CHECK the database if the account exists. Return true if exists. If it doesn't, then prompt user to sign up
 async function checkIfAccountExists(user, pass) {
   try {
-    const response = await fetch('https://6605-2601-600-8d82-2480-3489-e741-4354-7276.ngrok-free.app/login', {
+    const response = await fetch('https://418b-2601-600-8d82-2480-dd7e-1487-ba45-a742.ngrok-free.app/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -178,14 +194,14 @@ async function checkIfAccountExists(user, pass) {
 //connects with database and adds new table element containing new user and pass
 async function openAccount(user, pass, error) {
   try {
-    const response = await fetch('https://6605-2601-600-8d82-2480-3489-e741-4354-7276.ngrok-free.app/signup', {
+    const response = await fetch('https://418b-2601-600-8d82-2480-dd7e-1487-ba45-a742.ngrok-free.app/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username: username,
-        password: password
+        username: user,
+        password: pass
       })
     });
 
@@ -196,6 +212,7 @@ async function openAccount(user, pass, error) {
     console.error('Signup failed:', error);
     return false;
   }
+  
 }
 
 //Reload page cuz we don't need to really do anything after the user presses no when prompted
