@@ -189,19 +189,40 @@ loadImageBtn.addEventListener("click", async () => {
   });
 });
 
-// ── DRAW A SMALL IMAGE URL ONTO THE CANVAS ────────────────────────────────────
 function loadPaintingOntoCanvas(url) {
   const img = new Image();
-  img.crossOrigin = "anonymous"; // ← this triggers a CORS check
   img.onload = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    };
+    img.onerror = () => {
+      alert("Error: Could not load the painting from: " + url);
+      console.error("Image load failed for URL:", url);
+    };
+    img.src = url;
+    img.onload = () => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+    const canvasAspect = canvas.width / canvas.height;
+    const imgAspect = img.width / img.height;
+
+    let drawWidth, drawHeight, offsetX, offsetY;
+
+    if (imgAspect > canvasAspect) {
+      // Image is wider than canvas
+      drawWidth = canvas.width;
+      drawHeight = canvas.width / imgAspect;
+      offsetX = 0;
+      offsetY = (canvas.height - drawHeight) / 2;
+    } else {
+      // Image is taller than canvas
+      drawHeight = canvas.height;
+      drawWidth = canvas.height * imgAspect;
+      offsetX = (canvas.width - drawWidth) / 2;
+      offsetY = 0;
+    }
+    ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
   };
-  img.onerror = () => {
-    alert("Error: Could not load the painting from: " + url);
-    console.error("Image load failed for URL:", url);
-  };
-  img.src = url;
 }
 
 
