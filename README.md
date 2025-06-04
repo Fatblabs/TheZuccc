@@ -7,6 +7,7 @@ The Zuccc is a revolutionary app that will change the world. To use our wonderfu
 
 WEBSITE: main.d3asayb0opo9z8.amplifyapp.com
 
+Send me an email if you want to test! Make sure you're online so that when i turn on my computer you can get live updates.
 
 1. Enter username and password, then click "login".
 2. If you don't have an account, you will be prompted to create one.
