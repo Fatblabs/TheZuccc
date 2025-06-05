@@ -10,6 +10,10 @@ WEBSITE: main.d3asayb0opo9z8.amplifyapp.com
 Send me an email if you want to test! Make sure you're online so that when i turn on my computer you can get live updates.
 Email: s-nguyens@bsd405.org
 
+To access website:
+User: Sigma
+Password: masterzucc
+
 1. Enter username and password, then click "login".
 2. If you don't have an account, you will be prompted to create one.
 3. If you choose to create an account, you will be redirected to the drawing canvas.
