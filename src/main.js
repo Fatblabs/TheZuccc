@@ -33,7 +33,8 @@ class Account {
 
   validation() {
     let self = this;
-    let user, pass;
+    let user;
+    let pass;
 
     this.form.addEventListener("submit", async (event) => {
       try {
