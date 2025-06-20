@@ -172,7 +172,7 @@ function showPass() {
 //CHECK the database if the account exists. Return true if exists. If it doesn't, then prompt user to sign up
 async function checkIfAccountExists(user, pass) {
   try {
-    const response = await fetch('https://3fea-2601-600-8d82-2480-c403-3bd3-a030-b934.ngrok-free.app/login', {
+    const response = await fetch('https://1d10-2601-600-8d82-2480-ed12-278c-7d89-4b61.ngrok-free.app/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -194,7 +194,7 @@ async function checkIfAccountExists(user, pass) {
 //connects with database and adds new table element containing new user and pass
 async function openAccount(user, pass, error) {
   try {
-    const response = await fetch('https://3fea-2601-600-8d82-2480-c403-3bd3-a030-b934.ngrok-free.app/signup', {
+    const response = await fetch('https://1d10-2601-600-8d82-2480-ed12-278c-7d89-4b61.ngrok-free.app/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
