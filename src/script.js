@@ -13,7 +13,7 @@ const loadImageBtn = document.querySelector(".load-img");
 const paintingsContainer = document.getElementById("paintingsContainer");
 
 // Replace this with your actual ngrok (or production) domain:
-const API_BASE = "https://7410-2601-600-8d82-2480-ed12-278c-7d89-4b61.ngrok-free.app";
+const API_BASE = "https://6ec7-2601-600-8d82-2480-f05f-9d8c-384-d36.ngrok-free.app";
 
 // ── STATE VARIABLES ───────────────────────────────────────────────────────────
 let isDrawing     = false;
