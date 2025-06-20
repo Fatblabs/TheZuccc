@@ -151,13 +151,14 @@ class Account {
 }
 
 
-//THis is the amount of fields that are needed.
-const form = document.querySelector(".loginForm");
-console.log(form);
-if (form) {
-  const fields = ['UsernameElement', 'PasswordElement'];
-  const validator = new Account(form, fields);
-}
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector(".loginForm");
+  if (form) {
+    const fields = ['UsernameElement', 'PasswordElement'];
+    new Account(form, fields);
+  }
+});
+
 
 
 /* Show Password Function */
