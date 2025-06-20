@@ -44,6 +44,7 @@ class Account {
         // Validate each field
         self.fields.forEach((field) => {
           const input = document.querySelector(`#${field}`);
+          console.log(input.value);
           if (input.type === "password") {
             pass = input.value;
           } else {
@@ -172,8 +173,6 @@ function showPass() {
 }
 //CHECK the database if the account exists. Return true if exists. If it doesn't, then prompt user to sign up
 async function checkIfAccountExists(user, pass) {
-  console.log("User:", user);
-  console.log("Pass:", pass);
   try {
     const response = await fetch('https://7410-2601-600-8d82-2480-ed12-278c-7d89-4b61.ngrok-free.app/login', {
       method: 'POST',
@@ -197,8 +196,6 @@ async function checkIfAccountExists(user, pass) {
 
 //connects with database and adds new table element containing new user and pass
 async function openAccount(user, pass, error) {
-  console.log("User:", user);
-  console.log("Pass:", pass);
   try {
     const response = await fetch('https://7410-2601-600-8d82-2480-ed12-278c-7d89-4b61.ngrok-free.app/signup', {
       method: 'POST',
